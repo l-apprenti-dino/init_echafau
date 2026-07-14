@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Urbex | Échafaudage & Infiltration</title>
+  <style>
+    :root {
+      --bg-beige: #F9F6F0;
+      --card-beige: #F0EAE1;
+      --text-brown: #3E332E;
+      --accent-orange: #E78A4E;
+      --accent-orange-hover: #CF7439;
+      --border-color: #D9CFC1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-beige);
+      color: var(--text-brown);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: var(--card-beige);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      color: var(--accent-orange);
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-style: italic;
+      color: var(--text-brown);
+      opacity: 0.8;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background-color: var(--card-beige);
+      border: 1px solid var(--border-color);
+      color: var(--text-brown);
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    nav button:hover, nav button.active {
+      background-color: var(--accent-orange);
+      color: white;
+      border-color: var(--accent-orange);
+    }
+
+    .page {
+      display: none;
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-beige);
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h2 {
+      color: var(--text-brown);
+      border-bottom: 2px solid var(--accent-orange);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Page 1: Welcome Styles */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
+
+    .info-card {
+      background: var(--bg-beige);
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-orange);
+    }
+
+    /* Page 2: Booking Styles */
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-beige);
+      border-radius: 6px;
+      color: var(--text-brown);
+      font-size: 1rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--accent-orange);
+    }
+    button.submit-btn {
+      background-color: var(--accent-orange);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+    button.submit-btn:hover {
+      background-color: var(--accent-orange-hover);
+    }
+
+    /* Page 3: Reviews Styles */
+    .review {
+      background: var(--bg-beige);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border-color);
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .stars {
+      color: var(--accent-orange);
+    }
+
+    /* Warning Banner for the joke */
+    .disclaimer {
+      background-color: #fcefdc;
+      border: 1px solid #f5c6cb;
+      color: #856404;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Apex Urbex</h1>
+  <p>Élevez votre perspective. Dominez la jungle de béton.</p>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="openPage('welcome')">Accueil & Infos</button>
+  <button class="tab-btn" onclick="openPage('booking')">Réserver un Coach</button>
+  <button class="tab-btn" onclick="openPage('reviews')">Avis</button>
+  <button class="tab-btn" onclick="openPage('contact')">Contactez-nous</button>
+</nav>
+
+<!-- PAGE 1: ACCUEIL & INFOS -->
+<div id="welcome" class="page active">
+  <h2>Bienvenue dans l'Ascension</h2>
+  <p>Vous avez déjà regardé un échafaudage de chantier de 10 étages en vous disant : <em>"Je veux grimper là-haut"</em> ? Vous êtes au bon endroit. Apex Urbex vous initie à l'art de la navigation verticale sur échafaudage et à l'infiltration furtive de bâtiments. Apprenez les prises, les règles et l'art d'éviter le gardien de nuit.</p>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Horaires d'ouverture</h3>
+      <p><strong>Lundi - Vendredi :</strong> 21h00 – 04h00</p>
+      <p><strong>Samedi - Dimanche :</strong> 23h00 – 05h00</p>
+      <p><em>(Nous n'opérons que sous le couvert de l'obscurité.)</em></p>
+    </div>
+    <div class="info-card">
+      <h3>Équipement requis</h3>
+      <p>• Vêtements sombres et souples</p>
+      <p>• Chaussures en caoutchouc à forte adhérence</p>
+      <p>• Vérifiez deux fois votre courage</p>
+      <p>• WD-40 (pour les charnières grinçantes)</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: RÉSERVATION -->
+<div id="booking" class="page">
+  <h2>Réserver un rendez-vous</h2>
+  <p style="margin-bottom: 20px;">Réservez un créneau d'entraînement privé avec nos infiltrateurs vétérans. Choisissez votre durée et votre guide.</p>
+
+  <form onsubmit="alert('Rendez-vous réservé. Vérifiez vos canaux cryptés.'); return false;">
+    <div class="form-group">
+      <label for="coach">Sélectionnez votre Coach :</label>
+      <select id="coach" required>
+        <option value="pierre">Pierre (Acrobate des hauteurs)</option>
+        <option value="benoit">Benoit (Expert infiltration de toits)</option>
+        <option value="tanguy">Tanguy (Maître de la furtivité)</option>
+        <option value="ptit-louis">P'tit Louis (As du crochetage)</option>
+        <option value="spider-man">Spider man (Vitesse et agilité sur échafaudage)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Durée :</label>
+      <select id="duration" required>
+        <option value="1">1 Heure (Ascension rapide)</option>
+        <option value="2">2 Heures (Infiltration profonde)</option>
+        <option value="3">3 Heures (Le safari complet des toits)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Date & Créneau nocturne :</label>
+      <input type="datetime-local" id="date" required>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Demandes spéciales (ex : cibles de bâtiments spécifiques, peur du vide) :</label>
+      <textarea id="notes" rows="3" placeholder="Parlez-nous de votre condition physique actuelle..."></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Demander un rendez-vous</button>
+  </form>
+</div>
+
+<!-- PAGE 3: AVIS -->
+<div id="reviews" class="page">
+  <h2>Ce qu'en disent les oiseaux de nuit</h2>
+
+  <div class="review">
+    <div class="review-header">
+      <span>Alex_Flaneur99</span>
+      <span class="stars">★★★★★</span>
+    </div>
+    <p>"J'ai réservé une séance de 2 heures avec P'tit Louis. Avant, j'avais le vertige sur une chaise, mais à 3 heures du matin, on se détendait sur une grue au-dessus du quartier des affaires. 10/10 pour la montée d'adrénaline."</p>
+  </div>
+
+  <div class="review">
+    <div class="review-header">
+      <span>Agent_Secu_Local</span>
+      <span class="stars">★☆☆☆☆</span>
+    </div>
+    <p>"Je ne sais pas qui gère ce site, mais s'il vous plaît, arrêtez de graisser les cadenas du Secteur 4. Il m'a fallu trois heures pour tout fermer hier soir. Très peu professionnel."</p>
+  </div>
+
+  <div class="review">
+    <div class="review-header">
+      <span>Chloe_CatBurglar</span>
+      <span class="stars">★★★★☆</span>
+    </div>
+    <p>"Spider man m'a appris à grimper trois étages d'un échafaudage sans faire le moindre bruit. Une étoile en moins parce qu'un pigeon m'a fait peur et j'ai fait tomber ma lampe torche."</p>
+  </div>
+</div>
+
+<!-- PAGE 4: CONTACT -->
+<div id="contact" class="page">
+  <h2>Laissez un message (Anonymement)</h2>
+  <p style="margin-bottom: 20px;">Des questions sur les lieux de rendez-vous ou la définition légale de la violation de propriété ? Envoyez-nous un message.</p>
+
+  <form onsubmit="alert('Message envoyé dans l\'éther.'); return false;">
+    <div class="form-group">
+      <label for="codename">Nom de code :</label>
+      <input type="text" id="codename" placeholder="ex : FauconNocturne" required>
+    </div>
+    <div class="form-group">
+      <label for="msg">Message :</label>
+      <textarea id="msg" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Envoyer un message éphémère</button>
+  </form>
+</div>
+
+
+
+<script>
+  function openPage(pageId) {
+    // Masquer toutes les pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+
+    // Désactiver tous les boutons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // Afficher la page sélectionnée et activer le bouton associé
+    document.getElementById(pageId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+</body>
+</html>
